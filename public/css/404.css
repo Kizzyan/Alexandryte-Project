@@ -1,0 +1,76 @@
+@media (max-width: 650px) {
+  .header {
+    margin-bottom: 5rem;
+  }
+}
+
+main {
+  height: 73vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found {
+  color: #fff;
+  font-weight: 300;
+  text-align: center;
+  vertical-align: baseline;
+  animation: arrive 0.4s 1 ease-out forwards;
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+@media (max-width: 650px) {
+  .not-found {
+    margin-bottom: 7rem;
+  }
+}
+.not-found #status-code {
+  display: inline;
+  font-size: 3.8rem;
+  color: #20c997;
+}
+.not-found-h1 {
+  font-size: 3rem;
+  font-family: "Josefin Sans";
+  font-weight: 400;
+  vertical-align: middle;
+}
+.not-found-p {
+  font-weight: 400;
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+}
+.not-found-btn {
+  display: block;
+  width: 10rem;
+  margin: 0 auto;
+  font-weight: 400;
+  padding: 0.6rem 2rem;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.4s;
+  margin-top: 5rem;
+}
+.not-found-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+@media (max-width: 650px) {
+  .not-found-btn {
+    margin-top: 2rem;
+  }
+}
+
+/*# sourceMappingURL=404.css.map */

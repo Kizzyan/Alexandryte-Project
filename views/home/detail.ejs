@@ -1,0 +1,107 @@
+<%- include ('../include/head.ejs') %> 
+    <link rel="stylesheet" href="/css/home/detail.css">
+</head>
+<body>
+    <%- include ('../include/nav.ejs') %> 
+    <main >
+        <section class="major-container" id="img-container" style="--bg-img: url('<%= item.imageUrl %>') ">
+            <div id="image-container-minor">
+                <img id="image" src="<%= item.imageUrl %> " alt="cover of <%= item.title %> ">
+            </div>
+        </section>
+        <section class="major-container" id="major-detail-container">
+            <h1>Details</h1>
+            <article class="detail">
+                <div class="detail-container">
+                    <span class="details-span">Title</span> <br>
+                    <p class="details-p"><%= item.title %> </p>
+                </div>
+                <div class="detail-container">
+                    <span class="details-span">Type</span> <br>
+                    <p class="details-p"><%= item.type %> </p>
+                </div>
+                <div class="detail-container detail-grid">
+                    <div class="detail-containter-minor item-s">
+                        <span class="details-span">Item's Status</span> <br>
+                        <p class="details-p"><%= item.itemStatus %> </p>
+                    </div>
+                    <div class="detail-containter-minor self-s">
+                        <span class="details-span">Your's Status</span> <br>
+                        <p class="details-p"><%= item.userStatus %> </p>
+                    </div>
+                    <div class="detail-containter-minor total">
+                        <span for="totalChap" class="form-label">Total</span> <br>
+                        <p class="details-p"><%= item.totalChap %> </p>
+                    </div>
+                    <div class="detail-containter-minor stopped">
+                        <span class="details-span">Stopped at</span> <br>
+                        <p class="details-p"><%= item.stopChap %> </p> 
+                    </div>
+                    <div class="detail-containter-minor tags">
+                        <span class="details-span">Tags</span> <br>
+                        <div id="tags-div">
+                            <% if (item.tags[0] === '') { %>
+                                    <span>No tags here</span>
+                            <% } else { %>
+                                <% for(let tag of item.tags) { %>
+                                    <span><%= tag %> </span>
+                                <% } %>
+                             <% } %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-btns">
+                    <a id="edit-btn" href="/edit-item/<%= item._id %>" aria-label="edit button">
+                        <i class="edit-icon fa-solid fa-pen-to-square"></i> 
+                        <span class="btn-txt">Edit</span>
+                    </a>
+                    <button type="button" id="delete-btn" aria-label="delete button">
+                        <i class="delete-icon fa-solid fa-trash"></i> 
+                        <span class="btn-txt">Delete</span>
+                    </button>
+                    <form id="delete-form" action="/delete-item/<%= item._id %> " method="post">
+                        <span>Are you sure you want to delete this item?</span>
+                        <div>
+                            <button class="form-btn" id="cancel-btn-form" type="button">Cancel</button>
+                            <button class="form-btn" id="delete-btn-form" type="submit">Delete</button>
+                        </div>
+                    </form>
+                    <div id="darken"></div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <script defer>
+        const image = document.querySelector('#image')
+        const imageCont = document.querySelector('#image-container-minor')
+        const imageInput = document.querySelector('#imageUrl')
+        const darken = document.querySelector('#darken')
+        const deleteBtn = document.querySelector('#delete-btn')
+        const cancelBtn = document.querySelector('#cancel-btn-form')
+        const deleteForm = document.querySelector('#delete-form')
+
+        let width = image.width;
+        let height = image.height;
+
+        if (width > height || width == height) {
+            image.style.setProperty("height", "auto")
+            image.style.setProperty("max-width", "100%")
+            imageCont.style.setProperty("display", "grid")
+            imageCont.style.setProperty("align-content", "center")
+        }
+
+        
+        deleteBtn.addEventListener('click', () => {
+            deleteForm.style.setProperty("display", "block")
+            darken.style.setProperty('display', 'block')
+        })
+        cancelBtn.addEventListener('click', () => {
+            deleteForm.style.setProperty("display", "none")
+            darken.style.setProperty("display", "none")
+        })
+        darken.addEventListener('click', () => {
+            deleteForm.style.setProperty("display", "none")
+            darken.style.setProperty("display", "none")
+        })
+    </script>
+<%- include ('../include/end.ejs') %> 

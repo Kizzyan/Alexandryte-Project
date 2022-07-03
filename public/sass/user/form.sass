@@ -1,0 +1,191 @@
+@use '../variables'
+@use '../mixins'
+
+$test: var(--dimension)
+ 
+@debug $test
+
+body
+    background-size: 100%
+    background-position: center
+    background-image: radial-gradient(circle at left, #0f0611a6 30%, #0f0611 50%),  url('../../img/forest-bg.jpg')
+    background-size: cover
+
+main
+    display: flex 
+    align-items: center
+    padding: 1.7rem 2rem
+    justify-content: space-around
+    flex-direction: row
+    @media (max-width: 860px)
+        flex-direction: column
+        padding: 0
+        @include mixins.flex-center
+
+    .major-container
+        @include mixins.arrive
+        text-align: center
+        width: 30rem
+        height: 35rem
+        @include mixins.mobile
+            width: 100%
+        #image-container-minor
+            height: 100%
+            width: 100%
+            backdrop-filter: blur(10px)
+            img
+                margin: 0
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                width: 100%
+                height: 100%
+                width: auto
+                @mobile (max-width: 500px)
+                    width: auto
+                    height: 100%
+    #img-container
+        background-image: var(--bg-img)
+        background-position: center
+        background-size: cover
+        background-repeat: no-repeat
+        @include mixins.mobile
+            height: 100vw
+        // filter: blur(10px)
+    #major-detail-container
+        display: flex
+        flex-direction: column
+        align-content: center
+        justify-content: center
+        padding: 0 0.5rem
+
+    h1
+        font-size: 2.2rem
+        padding-bottom: 1rem
+
+
+.form 
+    min-width: 8rem
+
+    #submit-container
+        display: flex
+        flex-direction: row
+        justify-content: center
+        flex-wrap: wrap
+    .form-btn
+        cursor: pointer
+        background-color: variables.$secondary-color
+        color: variables.$bg-color
+        font-size: 1.2rem
+        transition: 0.4s
+        margin: 0 0.5rem
+        margin-top: 1rem
+        width: 40%
+        min-width: 5rem
+        &:hover
+            background-color: #ffffff
+    #form-link
+        text-align: center
+        border-radius: 15px
+        padding-top: 0.56rem
+
+    &-container
+        margin-bottom: 0.6rem
+        width: 100%
+        text-align: justify
+
+        &-minor
+            @include mixins.mobile
+                margin-bottom: 0.2rem
+
+        label
+            color: variables.$primary-color
+            text-transform: uppercase
+            font-size: 0.7rem
+            font-weight: 500
+
+        input, select, textarea
+            background-color: #1d1d1d
+            border: none
+            color: #ffffff
+            width: 100%
+            font-weight: 400
+            padding: 0.4rem 0.4rem
+            font-size: 1rem
+            height: 2.5rem
+            -moz-appearance: textfield
+            border-radius: 15px
+            margin-top: 0.1rem
+            transition: 0.1s
+        
+        textarea
+            &::-webkit-scrollbar
+                width: 0.2rem
+                background-color: #00000000
+            &::-webkit-scrollbar-thumb
+                background-color: variables.$secondary-color
+            
+            &:focus
+                outline: none
+                border: 0.2rem solid variables.$secondary-color
+                
+
+    &-grid
+        display: grid
+        grid-template-areas: "i-status total  tags" "y-status stop tags"
+        column-gap: 1rem
+        row-gap: 0.8rem
+        grid-template-columns: 8rem 7rem 13rem
+        @include mixins.mobile
+            padding-right: 1.1rem
+            grid-template-areas: "i-status total" "y-status stop" "tags tags"
+            grid-template-columns: 50% 50%
+
+        .item-s
+            grid-area: i-status
+
+        .self-s
+            grid-area: y-status
+
+        .stopped
+            grid-area: stop
+
+        .total
+            grid-area: total
+
+        .tags
+            grid-area: tags
+            textarea
+                resize: none
+                height: 84%
+                &::placeholder
+                    text-align: left
+                    overflow-wrap: break-word
+                    word-break:  break-word
+                
+    // &-links 
+    //     text-align: center
+    //     padding-top: 0.2rem
+    //     a
+    //         display: block
+    //         margin: 0.4rem 0
+    //         &:hover
+    //             color: variables.$secondary-color
+    
+    // &-flex
+    //     display: flex
+    //     flex-direction: row
+    //     justify-content: space-evenly
+    //     input, select
+    //         width: 9rem
+    //         font-size: 1rem
+    //         @include mixins.mobile
+    //             width: 100%
+    //             margin-bottom: 0.5rem
+    //         &:not(select)
+    //             padding: 1rem 0 1rem 0.4rem
+
+    //     @include mixins.mobile
+    //         flex-direction: column
+            

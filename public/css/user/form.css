@@ -1,0 +1,197 @@
+body {
+  background-size: 100%;
+  background-position: center;
+  background-image: radial-gradient(circle at left, rgba(15, 6, 17, 0.6509803922) 30%, #0f0611 50%), url("../../img/forest-bg.jpg");
+  background-size: cover;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  padding: 1.7rem 2rem;
+  justify-content: space-around;
+  flex-direction: row;
+}
+@media (max-width: 860px) {
+  main {
+    flex-direction: column;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+main .major-container {
+  animation: arrive 0.4s 1 ease-out forwards;
+  text-align: center;
+  width: 30rem;
+  height: 35rem;
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+@media (max-width: 675px) {
+  main .major-container {
+    width: 100%;
+  }
+}
+main .major-container #image-container-minor {
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+main .major-container #image-container-minor img {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  width: auto;
+}
+@mobile (max-width: 500px) {
+  main .major-container #image-container-minor img {
+    width: auto;
+    height: 100%;
+  }
+}
+main #img-container {
+  background-image: var(--bg-img);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (max-width: 675px) {
+  main #img-container {
+    height: 100vw;
+  }
+}
+main #major-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+}
+main h1 {
+  font-size: 2.2rem;
+  padding-bottom: 1rem;
+}
+
+.form {
+  min-width: 8rem;
+}
+.form #submit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.form .form-btn {
+  cursor: pointer;
+  background-color: #21d4a8;
+  color: #0f0611;
+  font-size: 1.2rem;
+  transition: 0.4s;
+  margin: 0 0.5rem;
+  margin-top: 1rem;
+  width: 40%;
+  min-width: 5rem;
+}
+.form .form-btn:hover {
+  background-color: #ffffff;
+}
+.form #form-link {
+  text-align: center;
+  border-radius: 15px;
+  padding-top: 0.56rem;
+}
+.form-container {
+  margin-bottom: 0.6rem;
+  width: 100%;
+  text-align: justify;
+}
+@media (max-width: 675px) {
+  .form-container-minor {
+    margin-bottom: 0.2rem;
+  }
+}
+.form-container label {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.form-container input, .form-container select, .form-container textarea {
+  background-color: #1d1d1d;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+  font-weight: 400;
+  padding: 0.4rem 0.4rem;
+  font-size: 1rem;
+  height: 2.5rem;
+  -moz-appearance: textfield;
+  border-radius: 15px;
+  margin-top: 0.1rem;
+  transition: 0.1s;
+}
+.form-container textarea::-webkit-scrollbar {
+  width: 0.2rem;
+  background-color: rgba(0, 0, 0, 0);
+}
+.form-container textarea::-webkit-scrollbar-thumb {
+  background-color: #21d4a8;
+}
+.form-container textarea:focus {
+  outline: none;
+  border: 0.2rem solid #21d4a8;
+}
+.form-grid {
+  display: grid;
+  grid-template-areas: "i-status total  tags" "y-status stop tags";
+  column-gap: 1rem;
+  row-gap: 0.8rem;
+  grid-template-columns: 8rem 7rem 13rem;
+}
+@media (max-width: 675px) {
+  .form-grid {
+    padding-right: 1.1rem;
+    grid-template-areas: "i-status total" "y-status stop" "tags tags";
+    grid-template-columns: 50% 50%;
+  }
+}
+.form-grid .item-s {
+  grid-area: i-status;
+}
+.form-grid .self-s {
+  grid-area: y-status;
+}
+.form-grid .stopped {
+  grid-area: stop;
+}
+.form-grid .total {
+  grid-area: total;
+}
+.form-grid .tags {
+  grid-area: tags;
+}
+.form-grid .tags textarea {
+  resize: none;
+  height: 84%;
+}
+.form-grid .tags textarea::placeholder {
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/*# sourceMappingURL=form.css.map */

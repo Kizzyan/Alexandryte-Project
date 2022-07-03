@@ -1,0 +1,226 @@
+@use 'variables'
+@use 'mixins'
+
+*
+    font-family: 'Josefin Sans'
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+
+body
+    background-color: variables.$bg-color
+    color: variables.$text-color
+    min-height: 100vh
+    &::-webkit-scrollbar
+        width: 0.2rem
+        background-color: variables.$bg-color
+    &::-webkit-scrollbar-thumb
+        background-color: variables.$secondary-color
+
+    a
+        color: variables.$text-color
+        text-decoration: none
+        transition: .4s
+
+    ul
+        list-style: none
+
+    @include mixins.pagination
+
+.header
+    display: flex
+    justify-content: space-between
+    @include mixins.container
+
+    @include mixins.mobile
+        padding: 1.1rem
+        // border: 1px solid white
+        align-items: center
+        justify-items: self-end
+        display: flex
+        flex-wrap: wrap
+        
+
+    &-brand
+        color: variables.$primary-color
+        font-size: 3rem
+        @include mixins.mobile
+            flex-grow: 4
+            // border: 1px solid white
+
+    &-toggle
+        display: none
+        border: none
+        padding: 0.8rem 1rem
+        margin-left: 0
+        text-decoration: none
+        background: #00000000
+        color: #ffffff
+        font-size: 1.5rem
+        cursor: pointer
+        transition: background 250ms ease-in-out, transform 150ms ease
+        &:hover
+            background-color: variables.$primary-color
+            color: variables.$bg-color
+        @include mixins.mobile
+            display: block
+            flex-grow: 1
+        
+        &-menu
+            margin-top: 6px
+
+    &-navbar
+        ul
+            height: 100%
+            @include mixins.flex-center
+            @include mixins.mobile
+                display: none
+
+            li
+                margin: 0 1rem
+                text-transform: uppercase
+                font-size: 1rem
+
+                .active
+                    color: variables.$secondary-color
+                    border-bottom: 0.1rem solid variables.$secondary-color
+
+                a
+                    padding: 0.4rem 
+                    &:hover
+                        color: variables.$secondary-color           
+
+main
+    // border: 1px solid white
+    width: 88%
+    min-height: 73vh
+    margin: 0 auto
+    padding: 0
+    text-align: right
+    @include mixins.mobile
+        text-align: center
+.container
+    display: inline-block
+    @include mixins.mobile
+        margin: 0
+    &-icon
+        color: variables.$text-color
+        background: none
+        font-size: 2rem
+        cursor: pointer
+        border: none
+        transition: 0.4s
+        margin: 0 1rem 1rem 1rem
+        &:hover
+            color: variables.$secondary-color
+        @include mixins.arrive
+
+.gallery
+    @include mixins.flex-center
+    @include mixins.container
+    @include mixins.mobile
+        flex-direction: column
+        padding: 0
+    flex-wrap: wrap
+    justify-content: space-around
+    padding: 0
+
+    &-card
+        color: variables.$primary-color
+        text-shadow: -1px 0 7px black, 0 1px 7px black, 1px 0 7px black, 0 -1px 7px black
+        width: 31%
+        border-radius: 20px 
+        height: 450px 
+        margin-bottom: 3%
+        text-align: center
+        background-color: variables.$bg-color
+        @include mixins.bg-img
+        @include mixins.flex-center
+        @include mixins.mobile
+            width: 100%
+            margin-bottom: 6%
+        flex-direction: column
+        @include mixins.arrive
+
+        @include mixins.progress 
+
+        &:hover
+            text-shadow: none
+            .progressbar
+                &-svg
+                    &-circle
+                        stroke-width: 12
+
+        a
+            .edit-icon
+                left: 1.8rem
+                @include mixins.icon
+                &:hover
+                    color: variables.$edit-color
+ 
+            .delete-icon
+                right: 1.8rem
+                @include mixins.icon
+                &:hover
+                    color: variables.$delete-color
+                    
+            .icon
+                @include mixins.mobile
+                    font-size: 2.3rem
+        &-title
+            font-size: 2rem
+            font-weight: 600
+            // border: 1px solid white
+            line-height: 1.8rem
+            margin-bottom: 1rem
+            width: 70%
+            height: 4rem
+            padding-top: 0.4rem
+            word-break: break-all
+            overflow-y: scroll
+            overflow-x: hidden 
+            &::-webkit-scrollbar
+                width: 0.4rem
+                background-color: #1d1d1d00
+            &::-webkit-scrollbar-thumb
+                background-color: variables.$secondary-color          
+
+        &-btn
+            @include mixins.btn-hover 
+
+
+
+.footer
+    position: relative
+    bottom: 0
+    @include mixins.flex-center
+    min-height: 10vh
+    display: flex
+    flex-direction: row
+    @include mixins.mobile
+        align-items: center
+        flex-direction: column
+        padding: 1.6rem 0
+    &-social-media
+        ul
+            display: flex
+            flex-direction: row
+            margin-left: 2rem
+            @include mixins.flex-center
+            @include mixins.mobile
+                justify-content: center
+                // background-color: white
+                margin: 0
+                margin-top: 1rem
+            height: 100%
+            li
+                font-size: 1.3rem
+                margin: 0 0.5rem
+                @include mixins.mobile
+                    font-size: 1.6rem
+                a
+                    &:hover
+                        color: variables.$secondary-color
+    span
+        font-weight: bold
+        color: variables.$secondary-color

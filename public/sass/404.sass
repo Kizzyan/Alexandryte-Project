@@ -1,0 +1,45 @@
+@use 'variables'
+@use 'mixins'
+
+.header
+    @include mixins.mobile
+        margin-bottom: 5rem
+main
+    // background-color: #fff
+    height: 73vh
+    display: flex
+    align-items: center
+    justify-content: center
+.not-found
+    color: variables.$primary-color
+    font-weight: 300
+    text-align: center
+    vertical-align: baseline
+    @include mixins.arrive
+    @include mixins.mobile
+        margin-bottom: 7rem
+    #status-code
+        display: inline
+        font-size: 3.8rem
+        color: variables.$secondary-color
+            
+    &-h1
+        font-size: 3rem
+        font-family: 'Josefin Sans'
+        font-weight: 400
+        vertical-align: middle
+
+    &-p
+        font-weight: 400
+        margin-bottom: 2rem
+        font-size: 1.4rem
+
+    &-btn
+        display: block
+        width: 10rem
+        margin: 0 auto
+        font-weight: 400
+        @include mixins.btn-hover
+        margin-top: 5rem
+        @include mixins.mobile
+            margin-top: 2rem

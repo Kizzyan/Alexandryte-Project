@@ -1,0 +1,30 @@
+<article class="pagination">
+    <% if (currentPage !== 1  && previousPage !== 1) { %>  
+        <a href="?page=1">01</a>
+    <% } %>
+    <% if (currentPage - 1 > 3 || previousPage - 1 > 1) { %>  
+        <a href="" class="not-active">...</a>
+    <% } %> 
+    <% if (hasPreviousPage) { %>  
+        <a href="?page=<%= previousPage %>"><%= previousPage < 10 ? '0' + previousPage : previousPage %></a>
+    <% } %>
+    <a href="?page=<%= currentPage %>" class="active"><%= currentPage < 10 ? '0' + currentPage : currentPage %></a>
+    <% if (hasNextPage) { %>  
+        <a href="?page=<%= nextPage %>"><%= nextPage < 10 ? '0' + nextPage : nextPage %></a>
+    <% } %> 
+    <% if (lastPage - currentPage  > 3 || lastPage - nextPage > 1) { %>  
+        <a href="" class="not-active" >...</a>
+    <% } %>               
+    <% if (lastPage !== currentPage  && nextPage !== lastPage) { %>  
+        <a href="?page=<%= lastPage %>"><%= lastPage < 10 ? '0' + lastPage : lastPage %></a>
+    <% } %>
+</section>
+
+<script defer>
+    let pagesBtn = document.querySelector('.pagination')
+    for (let item of pagesBtn.childNodes) {
+        if (item.innerHTML === '<%- currentPage %>') {
+            item.classList.add('active')
+        }
+    }
+</script>

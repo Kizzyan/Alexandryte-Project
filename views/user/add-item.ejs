@@ -1,0 +1,151 @@
+<%- include ('../include/head.ejs') %> 
+    <link rel="stylesheet" href="/css/user/form.css">
+</head>
+<body>
+    <%- include ('../include/nav.ejs') %> 
+    <main >
+        <% if (isEdit) { %>
+            <section class="major-container" id="img-container" style="--bg-img: url('<%= item.imageUrl %>') ">
+                <div id="image-container-minor">
+                    <img id="image" src="<%= item.imageUrl %> " alt="cover of <%= item.title %> ">
+                </div>
+            </section>
+        <% } %>
+        <section class="major-container">
+            <h1><% if (isEdit) { %> Update item <% } else { %>Add an item<% } %> </h1>
+            <form id="add-form" class="form" action="<% if (isEdit) { %>/edit-item<% } else { %>/add-item<% } %>" method="post">
+                <article class="form-container">
+                    <label for="title" class="form-label">Title<sup> &#9733;</sup></label> <br>
+                    <input class="form-input" type="text" name="title" id="title" required placeholder="Add the item's title" <% if (isEdit) { %> value="<%= item.title %>" <% } %>>
+                </article>
+                <article class="form-container">
+                    <label for="imageUrl" class="form-label">Image<sup> &#9733;</sup></label> <br>
+                    <input class="form-input" type="text" name="imageUrl" id="imageUrl" required placeholder="Add the image's URL" <% if (isEdit) { %> value="<%= item.imageUrl %>" <% } %>>
+                </article>
+                <!-- <div class="form-container">
+                    <label for="imageUrl" class="form-label">Image</label> <br>
+                    <input class="form-input form-img" type="file" name="imageUrl" id="imageUrl" required>
+                </div> -->
+                <article class="form-container">
+                    <label for="type" class="form-label">Type</label> <br>
+                    <select name="type" id="type" form="add-form">
+                        <option value="" disabled  <% if (!isEdit || !item.type) { %> selected <% } %>>Pick an option</option>
+                        <option value="Series" <% if (item.type == "Series") { %> selected <% } %>>Series</option>
+                        <option value="Movie" <% if (item.type == "Movie") { %> selected <% } %>>Movie</option>
+                        <option value="Manga/Comic" <% if (item.type == "Manga/Comic") { %> selected <% } %>>Manga/Comic</option>
+                        <option value="Book" <% if (item.type == "Book") { %> selected <% } %>>Book</option>
+                    </select>
+                </article>
+                <article class="form-container form-grid">
+                    <div class="form-containter-minor item-s">
+                        <label for="itemStatus" class="form-label">Item's Status</label> <br>
+                        <select name="itemStatus" id="itemStatus" form="add-form">
+                            <option value="" disabled <% if (!isEdit || !item.itemStatus) { %> selected <% } %>>Pick an option</option>
+                            <option value="Finished" <% if (item.itemStatus == "Finished") { %> selected <% } %>>Finished</option>
+                            <option value="Unfinished" <% if (item.itemStatus == "Unfinished") { %> selected <% } %>>Unfinished</option>
+                        </select>
+                    </div>
+                    <div class="form-containter-minor self-s">
+                        <label for="userStatus" class="form-label">Your's Status</label> <br>
+                        <select name="userStatus" id="userStatus" form="add-form">
+                            <option value="" disabled <% if (!isEdit || !item.userStatus) { %> selected <% } %>>Pick an option</option>
+                            <option value="Want to see" <% if (item.userStatus == "Want to see") { %> selected <% } %>>Want to see</option>
+                            <option value="Seeing" <% if (item.userStatus == "Seeing") { %> selected <% } %>>Seeing</option>
+                            <option value="Seen" <% if (item.userStatus == "Seen") { %> selected <% } %>>Seen</option>
+                        </select>
+                    </div>
+                    <div class="form-containter-minor total">
+                        <label for="totalChap" class="form-label">Total chapters<sup> &#9733;</sup> </label> <br>
+                        <input name="totalChap" id="totalChap" type="number" min="1" placeholder="Ex: 350" required <% if (isEdit) { %> value="<%= item.totalChap %>" <% } %>>
+                    </div>
+                    <div class="form-containter-minor stopped">
+                        <label for="stopChap" class="form-label">Stopped at<sup> &#9733;</sup></label> <br>
+                        <input name="stopChap" id="stopChap" type="number" min="0" placeholder="Ex: 5" required <% if (isEdit) { %> value="<%= item.stopChap %>" <% } %>>  
+                    </div>
+                    <div class="form-containter-minor tags">
+                        <label for="tags" class="form-label">Tags</label> <br>
+                        <!-- Since this is a text area i couldn't organize this logic through many lines, but, basically, this line check if the item has any tags and fetch each one of them while adding a comma, except by the last value, which would cause a bug otherwise  -->
+                        <textarea type="text" name="tags" id="tags" placeholder="Ex: comedy, horror, romance, etc"><% if (isEdit && item.tags[0] !== "") { %><% (item.tags).forEach(tag => {if (item.tags.indexOf(tag) !== item.tags.length -1) { %><%= tag %>, <% } else { %><%= tag %><%} }) %><% } %></textarea>
+                    </div>
+                </article>
+                <% if (isEdit) { %>
+                    <input type="hidden" value="<%= item._id %>" name="itemId">
+                <% } %>
+                <article class="form-container" id="submit-container">
+                    <input  class="form-btn" type="submit" value="<%= isEdit ? "Update Item" : "Add Item"%>">
+                    <a href="<% if (isEdit) { %>/item/<%= item._id %> <% } else { %>/<% } %>" class="form-btn" id="form-link">Cancel</a>
+                </article>
+            </form>
+        </section>
+    </main>
+    <script>
+        const image = document.querySelector('#image')
+        const imageInput = document.querySelector('#imageUrl')
+
+        let width = image.width;
+        let height = image.height;
+
+        if (width > height || width == height) {
+            image.style.setProperty("height", "auto")
+            image.style.setProperty("max-width", "100%")
+        }
+    </script>
+<%- include ('../include/end.ejs') %> 
+
+<!-- 
+<main >
+    <div class="major-container">
+        <h1>Add an item for your list</h1>
+        <form class="form" action="">
+            <div class="form-container">
+                <label for="title" class="form-label">Title</label> <br>
+                <input class="form-input" type="text" name="title" id="title" placeholder="Add the item's title">
+            </div>
+            <div class="form-container">
+                <label for="title" class="form-label">Type</label> <br>
+                <select name="type" id="type">
+                    <option value="Serie">Series</option>
+                    <option value="Movie">Movie</option>
+                    <option value="MangaComic">Manga/Comic</option>
+                    <option value="Book">Book</option>
+                </select>
+            </div>
+            <div class="form-container form-flex">
+                <div class="form-containter-minor">
+                    <label for="title" class="form-label">Item's Status</label> <br>
+                    <select name="type" id="type">
+                        <option value="" disabled selected>aaaaa</option>
+                        <option value="Serie">Finished</option>
+                        <option value="Serie">Unfinished</option>
+                    </select>
+                </div>
+                <div class="form-containter-minor to-right">
+                    <label for="title" class="form-label">Your's Status</label> <br>
+                    <select name="type" id="type">
+                        <option value="" disabled selected>aaaaa</option>
+                        <option value="Serie">Want to see</option>
+                        <option value="Serie">Seeing</option>
+                        <option value="Serie">Seen</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-container form-flex">
+                <div class="form-containter-minor">
+                    <label for="title" class="form-label">Stopped at</label> <br>
+                    <input type="number" placeholder="Ex: 5"> 
+                </div>
+                <div class="form-containter-minor to-right">
+                    <label for="title" class="form-label">Total chapters</label> <br>
+                    <input type="number" placeholder="Ex: 350">
+                </div>
+            </div>
+            <div class="form-container">
+                <label for="title" class="form-label">Tags</label> <br>
+                <input type="text" name="tags" id="tags" placeholder="Ex: comedy,horror,romance">
+            </div>
+            <div class="form-container">
+                <input id="submit-btn" type="submit" value="Add Item">
+            </div>
+        </form>
+    </div>
+</main> -->

@@ -1,0 +1,58 @@
+<%- include('include/head.ejs')%>
+</head>
+<body>
+    <%- include('include/nav.ejs') %>
+    <main>
+        <article class="container">
+            <button class="container-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <a class="container-icon" href="/add-item">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </article>
+        <article class="gallery">
+            <% if (items.length < 1) { %>
+                <h1>No items here yet</h1>
+                <h3>Try adding some</h3>
+            <% } else { %>
+                <% for( let item of items) { %>
+                    <section class="gallery-card" id="card-1" style="--bg-img: url('<%= item.imageUrl %>')">
+                        <!-- <progress value=<%= Math.floor((100*item.stopChap) / item.totalChap) %> min="0" max="100"></progress> -->
+
+                        <div class="progressbar">
+                            <svg class="progressbar-svg">
+                                <!-- This expression is responsible for extracting the % of completion and calculating the right radius -->
+                              <circle style="--percent: <%= 440 - (440 * Math.floor((100*item.stopChap) / item.totalChap)) / 100 %> "  cx="80" cy="80" r="70" class="progressbar-svg-circle circle shadow-html"> </circle>
+                            </svg>
+                            <span class="progressbar-text shadow-html">
+                                <% if (item.stopChap === item.totalChap &&  item.itemStatus === "Finished") { %>
+                                        <div style="height: 0.6rem;"></div>
+                                        <span style="font-size: 4rem" aria-label="star-symbol">
+                                            &#9733;
+                                        </span>
+                                    <% } else { %>
+                                        <%= Math.floor((100*item.stopChap) / item.totalChap) %>% 
+                                <% } %> 
+                            </span>
+                        </div>
+
+                        <h2 class="gallery-card-title"><%= item.title %></h2>
+                        <a href="/item/<%= item._id %> " class="gallery-card-btn">Detalhes</a>
+                        <!-- <a href="#">
+                            <i class="edit-icon icon fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="#">
+                            <i class="delete-icon icon fa-solid fa-trash">
+                                <div class="delete-icon-box">
+                                </div>
+                            </i>
+                        </a> -->
+                    </section>  
+                <% } %>
+            </article>
+            <%- include ('include/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+        <% } %> 
+    </main>
+<%- include ('include/end.ejs') %> 
+
