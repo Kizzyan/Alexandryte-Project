@@ -2,7 +2,7 @@ const Item = require("../models/item");
 
 exports.getAddItem = (req, res, next) => {
   res.render("user/add-item.ejs", {
-    pageTitle: "Add",
+    pageTitle: "Add Item",
     isEdit: false,
     item: {},
   });
@@ -32,7 +32,7 @@ exports.postAddItem = (req, res, next) => {
   item
     .save()
     .then(() => {
-      console.log("Item created");
+      // console.log("Item created");
       res.redirect("/");
     })
     .catch((err) => {
@@ -47,7 +47,7 @@ exports.getEditItem = async (req, res, next) => {
     !item
       ? res.redirect("/")
       : res.render("user/add-item.ejs", {
-          pageTitle: "Edit",
+          pageTitle: "Edit Item",
           item: item,
           isEdit: true,
         });
@@ -72,7 +72,7 @@ exports.postEditItem = async (req, res, next) => {
 
   try {
     await item.save();
-    console.log("Item updated");
+    // console.log("Item updated");
     res.redirect(`/item/${itemId}`);
   } catch (error) {
     console.log("Could not updated item due:", error);

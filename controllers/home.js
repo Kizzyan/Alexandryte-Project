@@ -16,7 +16,7 @@ exports.getItem = (req, res, next) => {
     .then((items) => {
       res.render("index.ejs", {
         items: items,
-        pageTitle: "Home",
+        pageTitle: "Alexandryte",
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
@@ -33,7 +33,7 @@ exports.getDetail = async (req, res, next) => {
     const item = await Item.findById(itemId);
     res.render("home/detail.ejs", {
       item: item,
-      pageTitle: "Item Detail",
+      pageTitle: item.title + " details",
     });
   } catch (error) {
     console.log(error);

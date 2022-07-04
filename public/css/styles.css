@@ -84,6 +84,10 @@ body .pagination .not-active {
   color: #fff;
   font-size: 3rem;
 }
+.header-brand #title-img {
+  height: 100%;
+  width: auto;
+}
 @media (max-width: 675px) {
   .header-brand {
     flex-grow: 4;
