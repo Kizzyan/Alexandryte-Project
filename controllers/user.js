@@ -1,14 +1,20 @@
 const Item = require("../models/item");
 
+const removeItem = (item, list) => {
+  const index = list.indexOf(item);
+  return list.splice(index, 1);
+};
+
 exports.getAddItem = (req, res, next) => {
   res.render("user/add-item.ejs", {
     pageTitle: "Add Item",
     isEdit: false,
     item: {},
+    isLogged: req.session.isLoggedIn,
   });
 };
 
-exports.postAddItem = (req, res, next) => {
+exports.postAddItem = async (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const type = req.body.type;
@@ -17,6 +23,7 @@ exports.postAddItem = (req, res, next) => {
   const totalChap = req.body.totalChap;
   const stopChap = req.body.stopChap;
   const tags = req.body.tags;
+  const user = req.user;
 
   const item = new Item({
     title: title,
@@ -27,17 +34,17 @@ exports.postAddItem = (req, res, next) => {
     totalChap: totalChap,
     stopChap: stopChap,
     tags: tags.split(", "),
+    userId: user,
   });
 
-  item
-    .save()
-    .then(() => {
-      // console.log("Item created");
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log("Could not create item due:", err);
-    });
+  try {
+    await item.save();
+    user.itemList.push(item);
+    await user.save();
+    res.redirect("/");
+  } catch (error) {
+    console.log("Could not create item due:", error);
+  }
 };
 
 exports.getEditItem = async (req, res, next) => {
@@ -50,6 +57,7 @@ exports.getEditItem = async (req, res, next) => {
           pageTitle: "Edit Item",
           item: item,
           isEdit: true,
+          isLogged: req.session.isLoggedIn,
         });
   } catch (error) {
     console.log(error);
@@ -79,12 +87,15 @@ exports.postEditItem = async (req, res, next) => {
   }
 };
 
-exports.deleteItem = async (req,res,next) => {
-  const itemId = req.params.itemId
+exports.deleteItem = async (req, res, next) => {
+  const itemId = req.params.itemId;
+  const user = req.user;
   try {
-    await Item.findByIdAndDelete(itemId)
-    res.redirect('/')
+    removeItem(itemId, user.itemList);
+    await user.save();
+    await Item.findByIdAndDelete(itemId);
+    res.redirect("/");
   } catch (error) {
-    console.log('Could not delete due:', error);
+    console.log("Could not delete due:", error);
   }
-}
+};

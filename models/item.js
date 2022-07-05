@@ -5,11 +5,10 @@ const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
   imageUrl: {
     type: String,
-    required: true,
   },
   type: {
     type: String,
@@ -29,14 +28,13 @@ const itemSchema = new Schema({
     required: true,
   },
   tags: {
-    type: [String],
-    // type: String,
+    type: [String]
   },
-//   userId: {
-//     type: Schema.Types.ObjectId,
-//     ref: "User",
-//     required: true,
-//   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Item", itemSchema);

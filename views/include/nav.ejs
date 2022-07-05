@@ -8,14 +8,22 @@
     <nav class="header-navbar">
         <ul>
             <li>
-                <a href="/" class="<%= pageTitle  === 'Home' ? 'active' : '' %>">Home</a>
+                <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>">Home</a>
             </li>
-            <li>
-                <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>">Login</a>
-            </li>
-            <li>
-                <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>">Signup</a>
-            </li> 
+            <% if (!isLogged) { %>
+                <li>
+                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>">Login</a>
+                </li>
+                <li>
+                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>">Signup</a>
+                </li>        
+            <% } else { %>
+                <li>
+                    <form action="/logout" method="post">
+                        <button id="logout" type="submit">Logout</button>
+                    </form>
+                </li> 
+            <% } %> 
             <li>
                 <a href="/about">About</a>
             </li>

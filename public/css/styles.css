@@ -17,7 +17,7 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: #21d4a8;
 }
-body a {
+body a, body #logout {
   color: #ffffff;
   text-decoration: none;
   transition: 0.4s;
@@ -129,19 +129,25 @@ body .pagination .not-active {
     display: none;
   }
 }
-.header-navbar ul li {
+.header-navbar ul li, .header-navbar ul button {
   margin: 0 1rem;
   text-transform: uppercase;
   font-size: 1rem;
 }
-.header-navbar ul li .active {
+.header-navbar ul li .active, .header-navbar ul button .active {
   color: #21d4a8;
   border-bottom: 0.1rem solid #21d4a8;
 }
-.header-navbar ul li a {
+.header-navbar ul li button, .header-navbar ul button button {
+  cursor: pointer;
+  margin: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.header-navbar ul li a, .header-navbar ul li #logout, .header-navbar ul button a, .header-navbar ul button #logout {
   padding: 0.4rem;
 }
-.header-navbar ul li a:hover {
+.header-navbar ul li a:hover, .header-navbar ul li #logout:hover, .header-navbar ul button a:hover, .header-navbar ul button #logout:hover {
   color: #21d4a8;
 }
 

@@ -18,6 +18,7 @@ exports.getItem = (req, res, next) => {
         items: items,
         pageTitle: "Alexandryte",
         currentPage: page,
+        isLogged: req.session.isLoggedIn,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
         nextPage: page + 1,
@@ -34,6 +35,7 @@ exports.getDetail = async (req, res, next) => {
     res.render("home/detail.ejs", {
       item: item,
       pageTitle: item.title + " details",
+      isLogged: req.session.isLoggedIn,
     });
   } catch (error) {
     console.log(error);
