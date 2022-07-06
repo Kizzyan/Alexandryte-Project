@@ -16,6 +16,7 @@
                     <input class="form-input" type="password" name="password" id="password" required placeholder="Enter your password">
                 </div>
                 <div class="form-container" id="submit-container">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input class="form-btn" type="submit" value="Log In">
                 </div>
             </form>

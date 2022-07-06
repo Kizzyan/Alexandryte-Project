@@ -4,22 +4,67 @@
     <%- include('include/nav.ejs') %>
     <main>
         <article class="container">
-            <button class="container-icon">
+            <button class="container-icon searchBtn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
             <a class="container-icon" href="/add-item">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </article>
+        <article class="search" id="searchContainer">
+            <form class="search-form" action="/search" method="get">
+                <article class="search-form-container">
+                    <label for="title" class="form-label">Title:</label> <br>
+                    <input class="form-input" type="text" name="title" id="title" placeholder="Search for title">
+                </article>
+                <article class="search-form-container">
+                    <label for="type" class="form-label">Type:</label> <br>
+                    <input type="text" name="type" id="type" placeholder="Search for media type"></input>
+                    <!-- <select name="type" id="type" form="add-form">
+                        <option value="" disabled  selected>Pick an option</option>
+                        <option value="Series">Series</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Movie" >Movie</option>
+                        <option value="Manga/Comic" >Manga/Comic</option>
+                        <option value="Book" >Book</option>
+                    </select> -->
+                </article>
+                <!-- <article class="search-form-container">
+                    <label for="itemStatus" class="form-label">Item's Status:</label>
+                    <select name="itemStatus" id="itemStatus" form="add-form">
+                        <option value="" disabled selected>Pick an option</option>
+                        <option value="Finished">Finished</option>
+                        <option value="Unfinished">Unfinished</option>
+                    </select>
+                </article> -->
+                <article class="search-form-container">
+                    <label for="userStatus" class="form-label">Your's Status:</label> <br>
+                    <input type="text" name="userStatus" id="userStatus" placeholder="Search for your status"></input>
+                    <!-- <select name="userStatus" id="userStatus" form="add-form">
+                        <option value="" disabled selected>Pick an option</option>
+                        <option value="Want to see" >Want to see</option>
+                        <option value="Seeing" >Seeing</option>
+                        <option value="Seen" >Seen</option>
+                    </select> -->
+                </article>
+                <article class="search-form-container">
+                    <label for="tags" class="form-label">Tags:</label> <br>
+                    <input type="text" name="tags" id="tags" placeholder="Search for a tag"></input>
+                </article>
+                <article class="search-form-container" id="submit-container">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>"> <br>
+                    <input  class="form-btn" type="submit" value="Search">
+                </article>
+            </form>
+        </article>
         <article class="gallery">
             <% if (items.length < 1) { %>
-                <h1>No items here yet</h1>
-                <h3>Try adding some</h3>
+                <section>
+                    <h1 id="notFound">No items here</h1>
+                </section>
             <% } else { %>
                 <% for( let item of items) { %>
                     <section class="gallery-card" id="card-1" style="--bg-img: url('<%= item.imageUrl %>')">
-                        <!-- <progress value=<%= Math.floor((100*item.stopChap) / item.totalChap) %> min="0" max="100"></progress> -->
-
                         <div class="progressbar">
                             <svg class="progressbar-svg">
                                 <!-- This expression is responsible for extracting the % of completion and calculating the right radius -->
@@ -39,20 +84,24 @@
 
                         <h2 class="gallery-card-title"><%= item.title %></h2>
                         <a href="/item/<%= item._id %> " class="gallery-card-btn">Detalhes</a>
-                        <!-- <a href="#">
-                            <i class="edit-icon icon fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a href="#">
-                            <i class="delete-icon icon fa-solid fa-trash">
-                                <div class="delete-icon-box">
-                                </div>
-                            </i>
-                        </a> -->
                     </section>  
                 <% } %>
             </article>
             <%- include ('include/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
         <% } %> 
     </main>
+    <script defer>
+        const searchBtn = document.querySelector('.searchBtn')
+        const searchForm = document.getElementById('searchContainer')
+
+        searchBtn.addEventListener('click', () => {
+            if (searchForm.style.display == "block") {
+                searchForm.style.setProperty("display", "none")
+            } else {
+                searchForm.style.setProperty("visibility", "visible")
+                searchForm.style.setProperty("display", "block")
+            }
+        })
+    </script>
 <%- include ('include/end.ejs') %> 
 

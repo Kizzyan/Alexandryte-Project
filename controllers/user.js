@@ -10,7 +10,6 @@ exports.getAddItem = (req, res, next) => {
     pageTitle: "Add Item",
     isEdit: false,
     item: {},
-    isLogged: req.session.isLoggedIn,
   });
 };
 
@@ -57,7 +56,6 @@ exports.getEditItem = async (req, res, next) => {
           pageTitle: "Edit Item",
           item: item,
           isEdit: true,
-          isLogged: req.session.isLoggedIn,
         });
   } catch (error) {
     console.log(error);
@@ -80,7 +78,6 @@ exports.postEditItem = async (req, res, next) => {
 
   try {
     await item.save();
-    // console.log("Item updated");
     res.redirect(`/item/${itemId}`);
   } catch (error) {
     console.log("Could not updated item due:", error);

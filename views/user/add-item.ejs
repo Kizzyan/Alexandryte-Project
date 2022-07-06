@@ -31,6 +31,7 @@
                     <select name="type" id="type" form="add-form">
                         <option value="" disabled  <% if (!isEdit || !item.type) { %> selected <% } %>>Pick an option</option>
                         <option value="Series" <% if (item.type == "Series") { %> selected <% } %>>Series</option>
+                        <option value="Anime" <% if (item.type == "Anime") { %> selected <% } %>>Anime</option>
                         <option value="Movie" <% if (item.type == "Movie") { %> selected <% } %>>Movie</option>
                         <option value="Manga/Comic" <% if (item.type == "Manga/Comic") { %> selected <% } %>>Manga/Comic</option>
                         <option value="Book" <% if (item.type == "Book") { %> selected <% } %>>Book</option>
@@ -72,6 +73,7 @@
                     <input type="hidden" value="<%= item._id %>" name="itemId">
                 <% } %>
                 <article class="form-container" id="submit-container">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input  class="form-btn" type="submit" value="<%= isEdit ? "Update Item" : "Add Item"%>">
                     <a href="<% if (isEdit) { %>/item/<%= item._id %> <% } else { %>/<% } %>" class="form-btn" id="form-link">Cancel</a>
                 </article>

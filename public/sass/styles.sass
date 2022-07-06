@@ -55,7 +55,7 @@ body
         display: none
         border: none
         padding: 0.8rem 1rem
-        margin-left: 0
+        margin-left: 0.5rem
         text-decoration: none
         background: #00000000
         color: #ffffff
@@ -68,6 +68,7 @@ body
         @include mixins.mobile
             display: block
             flex-grow: 1
+            margin-left: 0
         
         &-menu
             margin-top: 6px
@@ -110,7 +111,7 @@ main
         text-align: center
 .container
     display: inline-block
-    @include mixins.mobile
+    @include mixins.mobile 
         margin: 0
     &-icon
         color: variables.$text-color
@@ -124,6 +125,71 @@ main
             color: variables.$secondary-color
         @include mixins.arrive
 
+.search
+    display: none
+    &-form
+        animation: up-arrive 0.4s 1 ease-out forwards
+        @keyframes up-arrive
+            from
+                margin-top: -20px
+                opacity: 0
+            to
+                margin-top: 0px
+                opacity: 1
+
+        height: 3rem
+        padding: 0.5rem 0
+        margin-bottom: 0.8rem 
+        border-radius: 0.8rem
+        height: 100%
+        display: flex
+        justify-content: center
+        align-content: center
+        flex-direction: row
+        flex-wrap: wrap
+        background-color: #1d1d1d
+        color: variables.$primary-color
+        @include mixins.mobile
+        //     flex-wrap: nowrap
+        //     flex-direction: column
+            text-align: justify
+            justify-content: flex-start
+
+        &-container
+            font-size: 1.1rem
+            text-align: justify
+            margin: .3rem .8rem
+            @include mixins.mobile
+                width: 100%
+
+            label
+                color: variables.$primary-color
+                text-transform: uppercase
+                font-size: 0.7rem
+                font-weight: 500
+
+            input
+                background-color: variables.$primary-color
+                color: variables.$bg-color
+                border: none
+                font-size: 1rem
+                height: 1.8rem
+                width: 12rem
+                padding: 0rem 0.4rem
+                border-radius: 0.6rem
+                @include mixins.mobile
+                    min-width: 100%
+
+            input[type="submit"]
+                transition: .3s
+                cursor: pointer
+                &:hover
+                    background-color: variables.$secondary-color
+                    color: variables.$primary-color
+                // @include mixins.mobile
+
+
+
 .gallery
     @include mixins.flex-center
     @include mixins.container
@@ -133,6 +199,9 @@ main
     flex-wrap: wrap
     justify-content: space-around
     padding: 0
+
+    #notFound
+        font-size: 2.4rem
 
     &-card
         color: variables.$primary-color
