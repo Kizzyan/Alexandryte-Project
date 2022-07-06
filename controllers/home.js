@@ -2,30 +2,28 @@ const Item = require("../models/item");
 
 const ITEMS_PER_PAGE = 9;
 
-exports.getItem = (req, res, next) => {
+exports.getItem = async (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
-  Item.find()
-    .countDocuments()
-    .then((numItem) => {
-      totalItems = numItem;
-      return Item.find()
-        .skip((page - 1) * ITEMS_PER_PAGE)
-        .limit(ITEMS_PER_PAGE);
-    })
-    .then((items) => {
-      res.render("index.ejs", {
-        items: items,
-        pageTitle: "Alexandryte",
-        currentPage: page,
-        isLogged: req.session.isLoggedIn,
-        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-        hasPreviousPage: page > 1,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
-      });
-    });
+  if (!req.user) {
+    return res.redirect('/login')
+  }
+  const numItem = await Item.find({userId: req.user._id}).countDocuments();
+  totalItems = numItem;
+  const items = await Item.find({userId: req.user._id})
+    .skip((page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE);
+  res.render("index.ejs", {
+    items: items,
+    pageTitle: "Alexandryte",
+    currentPage: page,
+    isLogged: req.session.isLoggedIn,
+    hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+    hasPreviousPage: page > 1,
+    nextPage: page + 1,
+    previousPage: page - 1,
+    lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
+  });
 };
 
 exports.getDetail = async (req, res, next) => {
