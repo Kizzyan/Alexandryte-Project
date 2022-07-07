@@ -32,8 +32,6 @@ exports.getSearch = async (req,res,next) => {
   let searchType = req.query.type
   let searchStatus = req.query.userStatus
   let searchTags = req.query.tags
-  console.log(searchType);
-  console.log(searchStatus);
   if (!req.user) {
     return res.redirect('/login')
   }

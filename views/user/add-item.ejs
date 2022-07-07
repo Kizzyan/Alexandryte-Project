@@ -11,16 +11,19 @@
                 </div>
             </section>
         <% } %>
-        <section class="major-container">
+        <section class="major-container" id="major-form-container">
+            <% if (errorMessage.length > 0) { %>
+                <div class="major-container-error"><i class="fa-solid fa-triangle-exclamation"></i> <%= errorMessage %> </div>
+            <% } %>
             <h1><% if (isEdit) { %> Update item <% } else { %>Add an item<% } %> </h1>
-            <form id="add-form" class="form" action="<% if (isEdit) { %>/edit-item<% } else { %>/add-item<% } %>" method="post">
+            <form novalidate id="add-form" class="form" action="<% if (isEdit) { %>/edit-item<% } else { %>/add-item<% } %>" method="post">
                 <article class="form-container">
                     <label for="title" class="form-label">Title<sup> &#9733;</sup></label> <br>
-                    <input class="form-input" type="text" name="title" id="title" required placeholder="Add the item's title" <% if (isEdit) { %> value="<%= item.title %>" <% } %>>
+                    <input  class="form-input <%= valErrors.find(e => e.param === "title") ? 'form-error' : '' %>"" type="text" name="title" id="title" required placeholder="Add the item's title" <% if (isEdit) { %> value="<%= item.title %>" <% } else { %>value="<%= oldInput.title %>"<% } %> >
                 </article>
                 <article class="form-container">
                     <label for="imageUrl" class="form-label">Image<sup> &#9733;</sup></label> <br>
-                    <input class="form-input" type="text" name="imageUrl" id="imageUrl" required placeholder="Add the image's URL" <% if (isEdit) { %> value="<%= item.imageUrl %>" <% } %>>
+                    <input class="form-input <%= valErrors.find(e => e.param === "imageUrl") ? 'form-error' : '' %>"" type="text" name="imageUrl" id="imageUrl" required placeholder="Add the image's URL" <% if (isEdit) { %> value="<%= item.imageUrl %>" <% } else { %>value="<%= oldInput.imageUrl %>"<% } %> >
                 </article>
                 <!-- <div class="form-container">
                     <label for="imageUrl" class="form-label">Image</label> <br>
@@ -30,11 +33,11 @@
                     <label for="type" class="form-label">Type</label> <br>
                     <select name="type" id="type" form="add-form">
                         <option value="" disabled  <% if (!isEdit || !item.type) { %> selected <% } %>>Pick an option</option>
-                        <option value="Series" <% if (item.type == "Series") { %> selected <% } %>>Series</option>
-                        <option value="Anime" <% if (item.type == "Anime") { %> selected <% } %>>Anime</option>
-                        <option value="Movie" <% if (item.type == "Movie") { %> selected <% } %>>Movie</option>
-                        <option value="Manga/Comic" <% if (item.type == "Manga/Comic") { %> selected <% } %>>Manga/Comic</option>
-                        <option value="Book" <% if (item.type == "Book") { %> selected <% } %>>Book</option>
+                        <option value="Series" <% if (item.type == "Series" || oldInput.type === "Series") { %> selected <% } %>>Series</option>
+                        <option value="Anime" <% if (item.type == "Anime" || oldInput.type === "Anime") { %> selected <% } %>>Anime</option>
+                        <option value="Movie" <% if (item.type == "Movie" || oldInput.type === "Movie") { %> selected <% } %>>Movie</option>
+                        <option value="Manga/Comic" <% if (item.type == "Manga/Comic" || oldInput.type === "Manga/Comic") { %> selected <% } %>>Manga/Comic</option>
+                        <option value="Book" <% if (item.type == "Book" || oldInput.type === "Book") { %> selected <% } %>>Book</option>
                     </select>
                 </article>
                 <article class="form-container form-grid">
@@ -42,31 +45,31 @@
                         <label for="itemStatus" class="form-label">Item's Status</label> <br>
                         <select name="itemStatus" id="itemStatus" form="add-form">
                             <option value="" disabled <% if (!isEdit || !item.itemStatus) { %> selected <% } %>>Pick an option</option>
-                            <option value="Finished" <% if (item.itemStatus == "Finished") { %> selected <% } %>>Finished</option>
-                            <option value="Unfinished" <% if (item.itemStatus == "Unfinished") { %> selected <% } %>>Unfinished</option>
+                            <option value="Finished" <% if (item.itemStatus == "Finished" || oldInput.itemStatus === "Finished") { %> selected <% } %>>Finished</option>
+                            <option value="Unfinished" <% if (item.itemStatus == "Unfinished" || oldInput.itemStatus === "Unfinished") { %> selected <% } %>>Unfinished</option>
                         </select>
                     </div>
                     <div class="form-containter-minor self-s">
                         <label for="userStatus" class="form-label">Your's Status</label> <br>
                         <select name="userStatus" id="userStatus" form="add-form">
                             <option value="" disabled <% if (!isEdit || !item.userStatus) { %> selected <% } %>>Pick an option</option>
-                            <option value="Want to see" <% if (item.userStatus == "Want to see") { %> selected <% } %>>Want to see</option>
-                            <option value="Seeing" <% if (item.userStatus == "Seeing") { %> selected <% } %>>Seeing</option>
-                            <option value="Seen" <% if (item.userStatus == "Seen") { %> selected <% } %>>Seen</option>
+                            <option value="Want to see" <% if (item.userStatus == "Want to see" || oldInput.userStatus === "Want to see") { %> selected <% } %>>Want to see</option>
+                            <option value="Seeing" <% if (item.userStatus == "Seeing" || oldInput.userStatus === "Seeing") { %> selected <% } %>>Seeing</option>
+                            <option value="Seen" <% if (item.userStatus == "Seen" || oldInput.userStatus === "Seen" ) { %> selected <% } %>>Seen</option>
                         </select>
                     </div>
                     <div class="form-containter-minor total">
                         <label for="totalChap" class="form-label">Total chapters<sup> &#9733;</sup> </label> <br>
-                        <input name="totalChap" id="totalChap" type="number" min="1" placeholder="Ex: 350" required <% if (isEdit) { %> value="<%= item.totalChap %>" <% } %>>
+                        <input class="<%= valErrors.find(e => e.param === "totalChap") ? 'form-error' : '' %>" name="totalChap" id="totalChap" type="number" min="1" placeholder="Ex: 350" required <% if (isEdit) { %> value="<%= item.totalChap %>" <% } else { %>value="<%= oldInput.totalChap %>"<% } %>>
                     </div>
                     <div class="form-containter-minor stopped">
                         <label for="stopChap" class="form-label">Stopped at<sup> &#9733;</sup></label> <br>
-                        <input name="stopChap" id="stopChap" type="number" min="0" placeholder="Ex: 5" required <% if (isEdit) { %> value="<%= item.stopChap %>" <% } %>>  
+                        <input class="<%= valErrors.find(e => e.param === "stopChap") ? 'form-error' : '' %>" name="stopChap" id="stopChap" type="number" min="0" placeholder="Ex: 5" required <% if (isEdit) { %> value="<%= item.stopChap %>" <% } else { %>value="<%= oldInput.stopChap %>"<% } %>>  
                     </div>
                     <div class="form-containter-minor tags">
                         <label for="tags" class="form-label">Tags</label> <br>
-                        <!-- Since this is a text area i couldn't organize this logic through many lines, but, basically, this line check if the item has any tags and fetch each one of them while adding a comma, except by the last value, which would cause a bug otherwise  -->
-                        <textarea type="text" name="tags" id="tags" placeholder="Ex: comedy, horror, romance, etc"><% if (isEdit && item.tags[0] !== "") { %><% (item.tags).forEach(tag => {if (item.tags.indexOf(tag) !== item.tags.length -1) { %><%= tag %>, <% } else { %><%= tag %><%} }) %><% } %></textarea>
+                        <!-- Since this is a text area i couldn't organize this logic through many lines, but, basically, this line check if the form is in edit mode and if the item has any tags. Then, it fetch each one of them while adding a comma, except by the last value, which would cause a bug otherwise  -->
+                        <textarea type="text" name="tags" id="tags" placeholder="Ex: comedy, horror, romance, etc"><% if (isEdit && item.tags[0] !== "") { %><% (item.tags).forEach(tag => {if (item.tags.indexOf(tag) !== item.tags.length -1) { %><%= tag %>, <% } else { %><%= tag %><%} }) %><% } else {%><%= oldInput.tags %><% } %></textarea>
                     </div>
                 </article>
                 <% if (isEdit) { %>
@@ -74,7 +77,7 @@
                 <% } %>
                 <article class="form-container" id="submit-container">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <input  class="form-btn" type="submit" value="<%= isEdit ? "Update Item" : "Add Item"%>">
+                    <input  class="form-btn" type="submit" value="<%= isEdit ? "Update" : "Add"%>">
                     <a href="<% if (isEdit) { %>/item/<%= item._id %> <% } else { %>/<% } %>" class="form-btn" id="form-link">Cancel</a>
                 </article>
             </form>

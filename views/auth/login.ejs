@@ -5,15 +5,18 @@
     <%- include ('../include/nav.ejs') %> 
     <main >
         <div class="major-container">
+            <% if (errorMessage.length > 0) { %>
+                <div class="major-container-error"><i class="fa-solid fa-triangle-exclamation"></i> <%= errorMessage %> </div>
+            <% } %>
             <h1>Log In</h1>
-            <form class="form" action="/login" method="post"> 
+            <form class="form" action="/login" method="post" novalidate> 
                 <div class="form-container">
                     <label for="email" class="form-label">Email</label> <br>
-                    <input class="form-input" type="email" name="email" id="email" required placeholder="Enter your email">
+                    <input value="<%= oldInput.email %>" class="form-input <%= valErrors.find(e => e.param === "email") ? 'form-error' : '' %>" type="email" name="email" id="email" required placeholder="Enter your email">
                 </div> 
                 <div class="form-container">
                     <label for="password" class="form-label">Password</label> <br>
-                    <input class="form-input" type="password" name="password" id="password" required placeholder="Enter your password">
+                    <input value="<%= oldInput.password %>" class="form-input <%= valErrors.find(e => e.param === "password") ? 'form-error' : '' %>" type="password" name="password" id="password" required placeholder="Enter your password">
                 </div>
                 <div class="form-container" id="submit-container">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">

@@ -7,6 +7,7 @@ const favicon = require("serve-favicon");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csurf = require("csurf");
+const flash = require('connect-flash')
 require("dotenv").config();
 
 const User = require("./models/user");
@@ -38,7 +39,7 @@ app.use(
   })
 );
 app.use(csrfProtection);
-
+app.use(flash())
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();

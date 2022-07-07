@@ -14,11 +14,11 @@
         <article class="search" id="searchContainer">
             <form class="search-form" action="/search" method="get">
                 <article class="search-form-container">
-                    <label for="title" class="form-label">Title:</label> <br>
+                    <label for="title" class="form-label">Title</label> <br>
                     <input class="form-input" type="text" name="title" id="title" placeholder="Search for title">
                 </article>
                 <article class="search-form-container">
-                    <label for="type" class="form-label">Type:</label> <br>
+                    <label for="type" class="form-label">Type</label> <br>
                     <input type="text" name="type" id="type" placeholder="Search for media type"></input>
                     <!-- <select name="type" id="type" form="add-form">
                         <option value="" disabled  selected>Pick an option</option>
@@ -38,7 +38,7 @@
                     </select>
                 </article> -->
                 <article class="search-form-container">
-                    <label for="userStatus" class="form-label">Your's Status:</label> <br>
+                    <label for="userStatus" class="form-label">Your's Status</label> <br>
                     <input type="text" name="userStatus" id="userStatus" placeholder="Search for your status"></input>
                     <!-- <select name="userStatus" id="userStatus" form="add-form">
                         <option value="" disabled selected>Pick an option</option>
@@ -48,7 +48,7 @@
                     </select> -->
                 </article>
                 <article class="search-form-container">
-                    <label for="tags" class="form-label">Tags:</label> <br>
+                    <label for="tags" class="form-label">Tags</label> <br>
                     <input type="text" name="tags" id="tags" placeholder="Search for a tag"></input>
                 </article>
                 <article class="search-form-container" id="submit-container">
@@ -83,7 +83,7 @@
                         </div>
 
                         <h2 class="gallery-card-title"><%= item.title %></h2>
-                        <a href="/item/<%= item._id %> " class="gallery-card-btn">Detalhes</a>
+                        <a href="/item/<%= item._id %> " class="gallery-card-btn">Details</a>
                     </section>  
                 <% } %>
             </article>

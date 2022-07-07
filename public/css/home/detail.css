@@ -38,7 +38,7 @@ main .major-container {
     opacity: 1;
   }
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   main .major-container {
     width: 100%;
   }
@@ -68,7 +68,7 @@ main #img-container {
   background-size: cover;
   background-repeat: no-repeat;
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   main #img-container {
     height: 100vw;
   }
@@ -100,12 +100,12 @@ main h1 {
   width: 8rem;
   margin: 0.2rem 0.4rem;
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   .detail-btns a, .detail-btns button {
     width: 5rem;
   }
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   .detail-btns a span, .detail-btns button span {
     display: none;
   }
@@ -131,8 +131,8 @@ main h1 {
 .detail-btns #delete-form {
   font-size: 1.2rem;
   display: none;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 0%;
   left: 50%;
   width: 28rem;
   transform: translate(-50%, 50%);
@@ -144,10 +144,9 @@ main h1 {
   z-index: 3;
   animation: arrive 0.4s 1 ease-out forwards;
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   .detail-btns #delete-form {
     max-width: 70%;
-    top: 40rem;
   }
 }
 @keyframes arrive {
@@ -191,7 +190,7 @@ main h1 {
   width: 100%;
   text-align: justify;
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   .detail-container-minor {
     margin-bottom: 0.2rem;
   }
@@ -255,7 +254,7 @@ main h1 {
   row-gap: 0.8rem;
   grid-template-columns: 8rem 5rem 14rem;
 }
-@media (max-width: 650px) {
+@media (max-width: 675px) {
   .detail-grid {
     padding-right: 1.1rem;
     grid-template-areas: "i-status total" "y-status stop" "tags tags";

@@ -8,25 +8,25 @@
     <nav class="header-navbar">
         <ul>
             <li>
-                <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>">Home</a>
+                <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>"><i class="fa-solid fa-house"></i> Home</a>
             </li>
             <% if (!isLogged) { %>
                 <li>
-                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>">Login</a>
+                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
                 </li>
                 <li>
-                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>">Signup</a>
+                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>"><i class="fa-solid fa-user-plus"></i> Signup</a>
                 </li>        
             <% } else { %>
                 <li>
                     <form action="/logout" method="post">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button id="logout" type="submit">Logout</button>
+                        <button id="logout" type="submit"><i class="fa-solid fa-arrow-right-from-bracket"> Logout</i></button>
                     </form>
                 </li> 
             <% } %> 
             <li>
-                <a href="/about">About</a>
+                <a href="/about"><i class="fa-solid fa-circle-question"></i> About</a>
             </li>
         </ul>
     </nav>

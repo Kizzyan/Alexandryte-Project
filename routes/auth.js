@@ -1,18 +1,62 @@
-const express = require('express')
+const express = require("express");
+const bcrypt = require('bcryptjs')
 
-const authController = require('../controllers/auth')
+const { body } = require("express-validator");
 
-const router = express.Router()
+const authController = require("../controllers/auth");
+const User = require("../models/user");
 
-router.get('/signup', authController.getSignup)
+const router = express.Router();
 
-router.post('/signup', authController.postSignup)
+router.get("/signup", authController.getSignup);
 
-router.get('/login', authController.getLogin)
+router.post(
+  "/signup",
+  [
+    body("email")
+      .isEmail().withMessage("Please enter a valid email")
+      .custom(async (value, { req }) => {
+        const existingUser = await User.findOne({ email: value });
+          if (existingUser) {
+              return Promise.reject("Email already in use");
+          }
+      }),
+    body("password").isLength({ min: 6 }).withMessage("Password is too short"),
+    body("confirmPassword").custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords must match");
+      }
+      return true;
+    }),
+  ],
+  authController.postSignup
+);
 
-router.post('/login', authController.postLogin)
+router.get("/login", authController.getLogin);
 
-router.post('/logout', authController.postLogout);
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Please enter a valid email")
+    .custom(async (value, { req }) => {
+        const existingUser = await User.findOne({ email: value });
+          if (!existingUser) {
+              return Promise.reject("Email not found");
+          }
+      }),
+    body("password")
+    .custom(async (value, { req }) => {
+        const user = await User.findOne({ email: req.body.email });
+        const isMatch = await bcrypt.compare(value, user.password);
+          if (!isMatch) {
+              return Promise.reject("Wrong password");
+          }
+      }),
+  ],
+  authController.postLogin
+);
+
+router.post("/logout", authController.postLogout);
 
 // router.get('/reset', authController.getReset);
 
@@ -22,4 +66,4 @@ router.post('/logout', authController.postLogout);
 
 // router.post('/new-password', authController.postNewPassword);
 
-module.exports = router
+module.exports = router;
