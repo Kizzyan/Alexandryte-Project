@@ -23,7 +23,10 @@
         </ul>
     </div>
 </footer>
- 
-<script src="public/javascript/main.js"></script>
+ <% if (pageTitle === "Alexandryte") { %>
+    <script src="javascript/main.js"></script>
+    <% } else { %>
+        <script src="../javascript/main.js"></script>
+ <% } %> 
 </body>
 </html>

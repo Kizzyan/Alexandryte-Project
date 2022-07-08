@@ -1,0 +1,48 @@
+main {
+  animation: arrive 0.4s 1 ease-out forwards;
+  padding-top: 1rem;
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+main .about-section {
+  margin: 0 auto;
+  max-width: 50rem;
+  text-align: justify;
+}
+main .about-section a {
+  color: #21d4a8;
+}
+main .about-section .main-article {
+  margin-bottom: 2rem;
+}
+main .about-section .main-article h1 {
+  text-align: center;
+  font-size: 3.7rem;
+}
+main .about-section .main-article h1 span {
+  color: #21d4a8;
+}
+main .about-section .main-article h3 {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 40rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+main .about-section .main-article p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+main .about-section .sub-article {
+  font-size: 0.9rem;
+}
+
+/*# sourceMappingURL=about.css.map */

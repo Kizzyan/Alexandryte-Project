@@ -84,9 +84,13 @@ body .pagination .not-active {
   color: #fff;
   font-size: 3rem;
 }
-.header-brand #title-img {
-  height: 100%;
-  width: auto;
+.header-brand img {
+  width: 19rem;
+}
+@media (max-width: 730px) {
+  .header-brand img {
+    max-width: 100%;
+  }
 }
 @media (max-width: 730px) {
   .header-brand {
@@ -97,11 +101,10 @@ body .pagination .not-active {
   display: none;
   border: none;
   padding: 0.8rem 1rem;
-  margin-left: 0.5rem;
   text-decoration: none;
   background: rgba(0, 0, 0, 0);
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
   transition: background 250ms ease-in-out, transform 150ms ease;
 }
@@ -113,11 +116,76 @@ body .pagination .not-active {
   .header-toggle {
     display: block;
     flex-grow: 1;
-    margin-left: 0;
   }
 }
 .header-toggle-menu {
   margin-top: 6px;
+}
+.header-navbar-mobile {
+  background-color: #0f0611;
+  transition: 0.4s;
+  padding-top: 4rem;
+  position: fixed;
+  height: 100%;
+  width: 0;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.header-navbar-mobile ul {
+  text-align: center;
+}
+.header-navbar-mobile ul li, .header-navbar-mobile ul button {
+  animation: arrive 0.4s 1 ease-out forwards;
+  margin: 2rem 0;
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
+}
+.header-navbar-mobile ul li .active, .header-navbar-mobile ul button .active {
+  color: #21d4a8;
+}
+.header-navbar-mobile ul li a, .header-navbar-mobile ul li #logout, .header-navbar-mobile ul button a, .header-navbar-mobile ul button #logout {
+  font-size: 2rem;
+  color: #fff;
+  padding: 0.4rem;
+  text-transform: uppercase;
+}
+.header-navbar-mobile ul li a, .header-navbar-mobile ul button a {
+  margin: 7rem 0;
+}
+.header-navbar-mobile ul li #logout, .header-navbar-mobile ul button #logout {
+  letter-spacing: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 100;
+  margin: 0.5rem 0;
+}
+.header-navbar-mobile ul li button, .header-navbar-mobile ul button button {
+  cursor: pointer;
+  margin: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.header #darken-nav {
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  opacity: 0.7;
+  background-color: #0f0611;
+  filter: brightness(0.5);
+  z-index: 2;
 }
 .header-navbar ul {
   height: 100%;
@@ -182,20 +250,9 @@ main {
   border: none;
   transition: 0.4s;
   margin: 0 1rem 1rem 1rem;
-  animation: arrive 0.4s 1 ease-out forwards;
 }
 .container-icon:hover {
   color: #21d4a8;
-}
-@keyframes arrive {
-  from {
-    margin-top: 200px;
-    opacity: 0;
-  }
-  to {
-    margin-top: 0px;
-    opacity: 1;
-  }
 }
 
 .search {
@@ -305,7 +362,6 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  animation: arrive 0.4s 1 ease-out forwards;
 }
 .gallery-card:hover {
   background-size: 130%;
@@ -316,16 +372,6 @@ main {
   .gallery-card {
     width: 100%;
     margin-bottom: 6%;
-  }
-}
-@keyframes arrive {
-  from {
-    margin-top: 200px;
-    opacity: 0;
-  }
-  to {
-    margin-top: 0px;
-    opacity: 1;
   }
 }
 .gallery-card .progressbar {

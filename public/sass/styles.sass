@@ -44,9 +44,10 @@ body
     &-brand
         color: variables.$primary-color
         font-size: 3rem
-        #title-img
-            height: 100%
-            width: auto
+        img
+            width: 19rem
+            @include mixins.mobile
+                max-width: 100%
         @include mixins.mobile
             flex-grow: 4
             // border: 1px solid white
@@ -55,11 +56,10 @@ body
         display: none
         border: none
         padding: 0.8rem 1rem
-        margin-left: 0.5rem
         text-decoration: none
         background: #00000000
         color: #ffffff
-        font-size: 1.5rem
+        font-size: 2rem
         cursor: pointer
         transition: background 250ms ease-in-out, transform 150ms ease
         &:hover
@@ -68,10 +68,68 @@ body
         @include mixins.mobile
             display: block
             flex-grow: 1
-            margin-left: 0
         
         &-menu
             margin-top: 6px
+
+    &-navbar-mobile
+        // display: none
+        background-color: variables.$bg-color
+        // position: absolute
+        transition: 0.4s
+        padding-top: 4rem
+        position: fixed
+        height: 100%
+        width: 0
+        z-index: 10
+        right: 0
+        top: 0
+        bottom: 0
+
+        ul
+            text-align: center
+            li, button
+                @include mixins.arrive
+                margin: 2rem 0  
+                .active
+                    color: variables.$secondary-color
+                    // border-bottom: 0.1rem solid variables.$secondary-color
+
+                a, #logout
+                    font-size: 2rem
+                    color: variables.$primary-color
+                    padding: 0.4rem    
+                    // border: 1px solid black   
+                    text-transform: uppercase
+
+                a
+                    margin: 7rem 0  
+
+                #logout
+                    letter-spacing: 0.2rem
+                    font-size: 1.6rem
+                    font-weight: 100
+                    margin: 0.5rem 0
+
+                button
+                    cursor: pointer
+                    margin: 0
+                    border: none
+                    background-color: #00000000
+
+    #darken-nav
+        position: fixed
+        margin: 0
+        top: 0          
+        left: 0
+        width: 100%
+        height: 100vh
+        display: none
+        opacity: 0.7
+        background-color: variables.$bg-color
+        filter: brightness(0.5)
+        z-index: 2
+
 
     &-navbar
         ul
@@ -125,7 +183,7 @@ main
         margin: 0 1rem 1rem 1rem
         &:hover
             color: variables.$secondary-color
-        @include mixins.arrive
+        // @include mixins.arrive
 
 .search
     display: none
@@ -220,7 +278,7 @@ main
             width: 100%
             margin-bottom: 6%
         flex-direction: column
-        @include mixins.arrive
+        // @include mixins.arrive
 
         @include mixins.progress 
 

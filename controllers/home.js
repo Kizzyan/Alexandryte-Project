@@ -1,4 +1,5 @@
 const Item = require("../models/item");
+const { err } = require("../util/errorHandle");
 
 const ITEMS_PER_PAGE = 9;
 
@@ -6,11 +7,11 @@ exports.getIndex = async (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
   if (!req.user) {
-    return res.redirect('/login')
+    return res.redirect("/login");
   }
-  const numItem = await Item.find({userId: req.user._id}).countDocuments();
+  const numItem = await Item.find({ userId: req.user._id }).countDocuments();
   totalItems = numItem;
-  const items = await Item.find({userId: req.user._id})
+  const items = await Item.find({ userId: req.user._id })
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
   res.render("index.ejs", {
@@ -25,37 +26,35 @@ exports.getIndex = async (req, res, next) => {
   });
 };
 
-exports.getSearch = async (req,res,next) => {
+exports.getSearch = async (req, res, next) => {
   const page = +req.query.page || 1;
-  let totalItems; 
-  let searchTitle = req.query.title
-  let searchType = req.query.type
-  let searchStatus = req.query.userStatus
-  let searchTags = req.query.tags
+  let totalItems;
+  let searchTitle = req.query.title;
+  let searchType = req.query.type;
+  let searchStatus = req.query.userStatus;
+  let searchTags = req.query.tags;
   if (!req.user) {
-    return res.redirect('/login')
+    return res.redirect("/login");
   }
-  const numItem = await Item.find(
-    {
-      userId: req.user._id,
-      $or: [
-        {title: searchTitle == "" ? "" : {"$regex": searchTitle}},
-        {type: searchType == "" ? "" : {"$regex": searchType}},
-        {userStatus: searchStatus },
-        {tags: {$in: searchTags.slice(', ')}}
-      ]
-    }).countDocuments();
+  const numItem = await Item.find({
+    userId: req.user._id,
+    $or: [
+      { title: searchTitle == "" ? "" : { $regex: searchTitle } },
+      { type: searchType == "" ? "" : { $regex: searchType } },
+      { userStatus: searchStatus },
+      { tags: { $in: searchTags.slice(", ") } },
+    ],
+  }).countDocuments();
   totalItems = numItem;
-  const items = await Item.find(
-    {
-      userId: req.user._id,
-      $or: [
-        {title: searchTitle == "" ? "" : {"$regex": searchTitle}},
-        {type: searchType == "" ? "" : {"$regex": searchType}},
-        {userStatus: searchStatus == "" ? "" : {"$regex": searchStatus}},
-        {tags: {$in: searchTags.slice(', ')}}
-      ]
-    })
+  const items = await Item.find({
+    userId: req.user._id,
+    $or: [
+      { title: searchTitle == "" ? "" : { $regex: searchTitle } },
+      { type: searchType == "" ? "" : { $regex: searchType } },
+      { userStatus: searchStatus == "" ? "" : { $regex: searchStatus } },
+      { tags: { $in: searchTags.slice(", ") } },
+    ],
+  })
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
   res.render("index.ejs", {
@@ -68,7 +67,7 @@ exports.getSearch = async (req,res,next) => {
     previousPage: page - 1,
     lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
   });
-}
+};
 
 exports.getDetail = async (req, res, next) => {
   const itemId = req.params.itemId;
@@ -79,6 +78,12 @@ exports.getDetail = async (req, res, next) => {
       pageTitle: item.title + " details",
     });
   } catch (error) {
-    console.log(error);
+    err(500, error, next);
   }
 };
+
+exports.getAbout = (req,res,next) => {
+  res.render("home/about.ejs", {
+    pageTitle: "About"
+  })
+}

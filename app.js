@@ -7,7 +7,7 @@ const favicon = require("serve-favicon");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csurf = require("csurf");
-const flash = require('connect-flash')
+const flash = require("connect-flash");
 require("dotenv").config();
 
 const User = require("./models/user");
@@ -26,6 +26,7 @@ app.set("views", "views");
 const homeRoutes = require("./routes/home");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const errControl = require('./controllers/errors')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, "public", "img", "favicon.ico")));
@@ -39,18 +40,7 @@ app.use(
   })
 );
 app.use(csrfProtection);
-app.use(flash())
-app.use((req, res, next) => {
-  if (!req.session.user) {
-    return next();
-  }
-  User.findById(req.session.user._id)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => console.log(err));
-});
+app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.isLogged = req.session.isLoggedIn;
@@ -58,12 +48,33 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(async (req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  try {
+    const user = await User.findById(req.session.user._id);
+    if (!user) {
+      return next();
+    }
+    req.user = user;
+    next();
+  } catch (error) {
+    next (new Error(error));
+  }
+});
+
 app.use(homeRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 
-app.use((req, res, next) => {
-  res.status(404).render("errors/404.ejs", {
+app.get('/500', errControl.get500);
+
+app.use(errControl.get404);
+
+app.use((error, req, res, next) => {
+  console.log(error);
+  res.status(500).render("errors/500.ejs", {
     pageTitle: "Error",
     isLogged: req.session.isLoggedIn,
   });

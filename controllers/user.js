@@ -1,4 +1,7 @@
+// Obs.: It's named user because those are the user's actions
+
 const Item = require("../models/item");
+const { err } = require("../util/errorHandle");
 
 const { validationResult } = require("express-validator");
 
@@ -77,7 +80,7 @@ exports.postAddItem = async (req, res, next) => {
     await user.save();
     res.redirect("/");
   } catch (error) {
-    console.log("Could not create item due:", error);
+    err(500, error, next);
   }
 };
 
@@ -105,7 +108,7 @@ exports.getEditItem = async (req, res, next) => {
           errorMessage: req.flash("error"),
         });
   } catch (error) {
-    console.log(error);
+    err(500, error, next);
   }
 };
 
@@ -144,16 +147,11 @@ exports.postEditItem = async (req, res, next) => {
   item.stopChap = req.body.stopChap;
   item.tags = newTags.split(", ");
 
-  // if (item.stopChap > item.totalChap) {
-  //   req.flash("error", "Stopped value can't be greater than Total");
-  //   return res.redirect(`/edit-item/${itemId}`);
-  // }
-
   try {
     await item.save();
     res.redirect(`/item/${itemId}`);
   } catch (error) {
-    console.log("Could not updated item due:", error);
+    err(500, error, next);
   }
 };
 
@@ -166,6 +164,6 @@ exports.deleteItem = async (req, res, next) => {
     await Item.findByIdAndDelete(itemId);
     res.redirect("/");
   } catch (error) {
-    console.log("Could not delete due:", error);
+    err(500, error, next);
   }
 };

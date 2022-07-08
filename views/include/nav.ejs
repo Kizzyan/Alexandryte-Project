@@ -1,33 +1,62 @@
 <header class="header">
     <h1>
-        <a href="/" class="header-brand">Alexandryte</a>
+        <!-- <a href="/" class="header-brand">Alexandryte</a> -->
+        <a href="/" class="header-brand" ><img src="/img/title.svg" alt=""></a>
     </h1>
-    <button class="header-toggle" aria-label="menu button">
+    <button id="toggle-btn" class="header-toggle" aria-label="menu button">
         <i class="fa-solid fa-bars header-toggle-menu"></i>
     </button>
     <nav class="header-navbar">
         <ul>
-            <li>
-                <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>"><i class="fa-solid fa-house"></i> Home</a>
-            </li>
-            <% if (!isLogged) { %>
+            <% if (isLogged) { %>
                 <li>
-                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                    <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>"><i class="fa-solid fa-house"></i> Home</a>
                 </li>
-                <li>
-                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>"><i class="fa-solid fa-user-plus"></i> Signup</a>
-                </li>        
-            <% } else { %>
                 <li>
                     <form action="/logout" method="post">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button id="logout" type="submit"><i class="fa-solid fa-arrow-right-from-bracket"> Logout</i></button>
                     </form>
                 </li> 
+            <% } else { %>
+                <li>
+                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </li>
+                <li>
+                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>"><i class="fa-solid fa-user-plus"></i> Signup</a>
+                </li>        
             <% } %> 
             <li>
-                <a href="/about"><i class="fa-solid fa-circle-question"></i> About</a>
+                <a href="/about" class="<%= pageTitle === 'About' ? 'active' : '' %>"><i class="fa-solid fa-circle-question"></i> About</a>
             </li>
         </ul>
     </nav>
+
+
+    <nav id="mobNav" class="header-navbar-mobile">
+        <ul>
+            <% if (isLogged) { %>
+                <li>
+                    <a href="/" class="<%= pageTitle  === 'Alexandryte' ? 'active' : '' %>"><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+                <li>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button id="logout" type="submit"><i class="fa-solid fa-arrow-right-from-bracket"> Logout</i></button>
+                    </form>
+                </li> 
+            <% } else { %>
+                <li>
+                    <a href="/login" class="<%= pageTitle === 'Login' ? 'active' : '' %>"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </li>
+                <li>
+                    <a href="/signup" class="<%= pageTitle === 'Signup' ? 'active' : '' %>"><i class="fa-solid fa-user-plus"></i> Signup</a>
+                </li>        
+            <% } %> 
+            <li>
+                <a href="/about" class="<%= pageTitle === 'About' ? 'active' : '' %>"><i class="fa-solid fa-circle-question"></i> About</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="darken-nav"></div>
 </header>

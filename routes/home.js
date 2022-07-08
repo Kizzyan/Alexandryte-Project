@@ -7,6 +7,8 @@ const router = express.Router()
 
 router.get('/', homeController.getIndex)
 
+router.get('/about', homeController.getAbout)
+
 router.get('/item/:itemId', isAuth, homeController.getDetail)
 
 router.get('/search', isAuth, homeController.getSearch)

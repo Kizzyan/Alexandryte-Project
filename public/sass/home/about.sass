@@ -1,0 +1,44 @@
+@use '../variables'
+@use '../mixins'
+    
+main 
+    // background-color: white
+    // border: 1px solid white
+    @include mixins.arrive
+    padding-top: 1rem
+
+    .about-section
+        margin: 0 auto
+        // border: 1px solid white
+        max-width: 50rem
+        text-align: justify
+
+        a
+            color: variables.$secondary-color
+
+        .main-article
+            // border: 1px solid white
+            margin-bottom: 2rem
+
+            h1
+                text-align: center
+                font-size: 3.7rem
+                // border: 1px solid white
+                span
+                    color: variables.$secondary-color
+            h3
+                margin: 0 auto
+                text-align: center
+                // border: 1px solid white
+                max-width: 40rem
+                font-size: 1.2rem
+                margin-bottom: 2rem 
+
+            p
+                // border: 1px solid white
+                font-size: 1.1rem
+                margin-bottom: 1rem
+
+        .sub-article
+            font-size: 0.9rem
+

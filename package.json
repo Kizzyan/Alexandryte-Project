@@ -9,6 +9,7 @@
     "style:404": "sass --watch public/sass/404.sass:public/css/404.css",
     "style:form": "sass --watch public/sass/user/form.sass:public/css/user/form.css",
     "style:detail": "sass --watch public/sass/home/detail.sass:public/css/home/detail.css",
+    "style:about": "sass --watch public/sass/home/about.sass:public/css/home/about.css",
     "start": "node app.js",
     "start:dev": "nodemon app.js"
   },

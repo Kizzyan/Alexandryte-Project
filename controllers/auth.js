@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
+const { err } = require("../util/errorHandle");
 
 exports.getLogin = (req, res, next) => {
   res.render("auth/login.ejs", {
@@ -51,7 +52,7 @@ exports.postLogin = async (req, res, next) => {
     });
     // }
   } catch (error) {
-    console.log("Coulnd't login due: ",error);
+    err(500, error, next);
   }
 };
 
@@ -106,6 +107,6 @@ exports.postSignup = async (req, res, next) => {
     await user.save();
     return res.redirect("/login");
   } catch (error) {
-    console.log("Could not register due: ", error);
+    err(500, error, next);
   }
 };

@@ -1,17 +1,12 @@
-const backdrop = document.querySelector('.backdrop');
-const sideDrawer = document.querySelector('.header-navbar-mobile');
-const menuToggle = document.querySelector('.header-toggle-button');
+const darkenNav = document.querySelector("#darken-nav");
+const menu = document.querySelector("#mobNav");
+const toggle = document.getElementById('toggle-btn')
 
-function backdropClickHandler() {
-  backdrop.style.display = 'none';
-  sideDrawer.classList.remove('open');
-}
-
-function menuToggleClickHandler() {
-  backdrop.style.display = 'block';
-  sideDrawer.classList.add('open');
-}
-
-
-backdrop.addEventListener('click', backdropClickHandler);
-menuToggle.addEventListener('click', menuToggleClickHandler);
+toggle.addEventListener("click", () => {
+  menu.style.setProperty("width", "13rem");
+  darkenNav.style.setProperty("display", "block");
+});
+darkenNav.addEventListener("click", () => {
+  menu.style.setProperty("width", "0");
+  darkenNav.style.setProperty("display", "none");
+});
