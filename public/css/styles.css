@@ -250,9 +250,20 @@ main {
   border: none;
   transition: 0.4s;
   margin: 0 1rem 1rem 1rem;
+  animation: arrive 0.4s 1 ease-out forwards;
 }
 .container-icon:hover {
   color: #21d4a8;
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
+  }
 }
 
 .search {
@@ -362,6 +373,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  animation: arrive 0.4s 1 ease-out forwards;
 }
 .gallery-card:hover {
   background-size: 130%;
@@ -372,6 +384,16 @@ main {
   .gallery-card {
     width: 100%;
     margin-bottom: 6%;
+  }
+}
+@keyframes arrive {
+  from {
+    margin-top: 200px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0px;
+    opacity: 1;
   }
 }
 .gallery-card .progressbar {
