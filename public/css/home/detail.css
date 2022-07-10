@@ -25,6 +25,7 @@ main {
 main .major-container {
   animation: arrive 0.4s 1 ease-out forwards;
   text-align: center;
+  position: relative;
   width: 30rem;
   height: 35rem;
 }
@@ -38,10 +39,22 @@ main .major-container {
     opacity: 1;
   }
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   main .major-container {
     width: 100%;
   }
+}
+main .major-container-link {
+  font-size: 2.4rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  color: #21d4a8;
+  box-shadow: 0 0 20px black;
+  border-radius: 50%;
+  padding: 0.7rem 1rem;
+  background-color: #fff;
 }
 main .major-container #image-container-minor {
   height: 100%;
@@ -59,7 +72,6 @@ main .major-container #image-container-minor img {
 @mobile (max-width: 500px) {
   main .major-container #image-container-minor img {
     width: auto;
-    height: 100%;
   }
 }
 main #img-container {
@@ -68,7 +80,7 @@ main #img-container {
   background-size: cover;
   background-repeat: no-repeat;
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   main #img-container {
     height: 100vw;
   }
@@ -100,12 +112,12 @@ main h1 {
   width: 8rem;
   margin: 0.2rem 0.4rem;
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   .detail-btns a, .detail-btns button {
     width: 5rem;
   }
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   .detail-btns a span, .detail-btns button span {
     display: none;
   }
@@ -144,7 +156,7 @@ main h1 {
   z-index: 3;
   animation: arrive 0.4s 1 ease-out forwards;
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   .detail-btns #delete-form {
     max-width: 70%;
   }
@@ -190,7 +202,7 @@ main h1 {
   width: 100%;
   text-align: justify;
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   .detail-container-minor {
     margin-bottom: 0.2rem;
   }
@@ -254,7 +266,7 @@ main h1 {
   row-gap: 0.8rem;
   grid-template-columns: 8rem 5rem 14rem;
 }
-@media (max-width: 675px) {
+@media (max-width: 730px) {
   .detail-grid {
     padding-right: 1.1rem;
     grid-template-areas: "i-status total" "y-status stop" "tags tags";

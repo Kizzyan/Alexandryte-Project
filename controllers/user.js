@@ -19,6 +19,7 @@ exports.getAddItem = (req, res, next) => {
     oldInput: {
       title: "",
       imageUrl: "",
+      link: "",
       type: "",
       itemStatus: "",
       userStatus: "",
@@ -33,6 +34,7 @@ exports.getAddItem = (req, res, next) => {
 exports.postAddItem = async (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
+  const link = req.body.link;
   const type = req.body.type;
   const itemStatus = req.body.itemStatus;
   const userStatus = req.body.userStatus;
@@ -51,6 +53,7 @@ exports.postAddItem = async (req, res, next) => {
       oldInput: {
         title: title,
         imageUrl: imageUrl,
+        link: link,
         type: type,
         itemStatus: itemStatus,
         userStatus: userStatus,
@@ -65,6 +68,7 @@ exports.postAddItem = async (req, res, next) => {
   const item = new Item({
     title: title,
     imageUrl: imageUrl,
+    link: link,
     type: type,
     itemStatus: itemStatus,
     userStatus: userStatus,
@@ -98,6 +102,7 @@ exports.getEditItem = async (req, res, next) => {
           oldInput: {
             title: "",
             imageUrl: "",
+            link: "",
             type: "",
             itemStatus: "",
             userStatus: "",
@@ -127,6 +132,7 @@ exports.postEditItem = async (req, res, next) => {
       oldInput: {
         title: "",
         imageUrl: "",
+        link: "",
         type: "",
         itemStatus: "",
         userStatus: "",
@@ -140,6 +146,7 @@ exports.postEditItem = async (req, res, next) => {
 
   item.title = req.body.title;
   item.imageUrl = req.body.imageUrl;
+  item.link = req.body.link;
   item.type = req.body.type;
   item.itemStatus = req.body.itemStatus;
   item.userStatus = req.body.userStatus;

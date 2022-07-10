@@ -6,6 +6,9 @@
     <main >
         <section class="major-container" id="img-container" style="--bg-img: url('<%= item.imageUrl %>') ">
             <div id="image-container-minor">
+                <% if (item.link) { %>
+                    <a href="<%= item.link %> " target="_blank" class="major-container-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <% } %>
                 <img id="image" src="<%= item.imageUrl %> " alt="cover of <%= item.title %> ">
             </div>
         </section>

@@ -11,7 +11,7 @@ main
         margin: 0 auto
         // border: 1px solid white
         max-width: 50rem
-        text-align: justify
+        text-align: left
 
         a
             color: variables.$secondary-color
@@ -26,6 +26,8 @@ main
                 // border: 1px solid white
                 span
                     color: variables.$secondary-color
+                @include mixins.mobile
+                    font-size: 15vw
             h3
                 margin: 0 auto
                 text-align: center

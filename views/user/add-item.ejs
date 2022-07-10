@@ -25,6 +25,10 @@
                     <label for="imageUrl" class="form-label">Image<sup> &#9733;</sup></label> <br>
                     <input class="form-input <%= valErrors.find(e => e.param === "imageUrl") ? 'form-error' : '' %>"" type="text" name="imageUrl" id="imageUrl" required placeholder="Add the image's URL" <% if (isEdit) { %> value="<%= item.imageUrl %>" <% } else { %>value="<%= oldInput.imageUrl %>"<% } %> >
                 </article>
+                <article class="form-container">
+                    <label for="link" class="form-label">Link</label> <br>
+                    <input class="form-input <%= valErrors.find(e => e.param === "link") ? 'form-error' : '' %>"" type="text" name="link" id="link" required placeholder="Add a link for seeing this item" <% if (isEdit) { %> value="<%= item.link %>" <% } else { %>value="<%= oldInput.link %>"<% } %> >
+                </article>
                 <!-- <div class="form-container">
                     <label for="imageUrl" class="form-label">Image</label> <br>
                     <input class="form-input form-img" type="file" name="imageUrl" id="imageUrl" required>

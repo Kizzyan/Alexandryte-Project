@@ -15,7 +15,7 @@ main {
 main .about-section {
   margin: 0 auto;
   max-width: 50rem;
-  text-align: justify;
+  text-align: left;
 }
 main .about-section a {
   color: #21d4a8;
@@ -29,6 +29,11 @@ main .about-section .main-article h1 {
 }
 main .about-section .main-article h1 span {
   color: #21d4a8;
+}
+@media (max-width: 730px) {
+  main .about-section .main-article h1 {
+    font-size: 15vw;
+  }
 }
 main .about-section .main-article h3 {
   margin: 0 auto;

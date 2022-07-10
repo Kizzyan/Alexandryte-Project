@@ -10,6 +10,9 @@ const itemSchema = new Schema({
   imageUrl: {
     type: String,
   },
+  link: {
+    type: String,
+  },
   type: {
     type: String,
   },
