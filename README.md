@@ -24,7 +24,7 @@ You can email me at yan.leitao26@gmail.com or contact me at <a href="https://www
 ---
 
 ## Installing:
-Just ```npm install```. Any other useful npm script can be found in the package.json.
+If you want to run this app on your machine juust ```npm install```. Any other useful npm script can be found in the package.json. Any key needed can be found in the .env.sample file
 
 ---
 
@@ -57,6 +57,7 @@ Just ```npm install```. Any other useful npm script can be found in the package.
   - Mongoose: MongoDB's ODM for making dealing with MongoDB via Node easier
   - SASS: CSS pre-processor for styling
   - EJS: Templating language for Node
+  - GIMP: For creating the logo
 
 ---
 
