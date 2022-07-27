@@ -2,7 +2,7 @@
     <% if (currentPage !== 1  && previousPage !== 1) { %>  
         <a href="?page=1">01</a>
     <% } %>
-    <% if (currentPage - 1 > 3 || previousPage - 1 > 1) { %>  
+    <% if (currentPage - 1 > 2 || previousPage - 1 > 1) { %>  
         <a href="" class="not-active">...</a>
     <% } %> 
     <% if (hasPreviousPage) { %>  
@@ -12,7 +12,7 @@
     <% if (hasNextPage) { %>  
         <a href="?page=<%= nextPage %>"><%= nextPage < 10 ? '0' + nextPage : nextPage %></a>
     <% } %> 
-    <% if (lastPage - currentPage  > 3 || lastPage - nextPage > 1) { %>  
+    <% if (lastPage - currentPage  > 2 || lastPage - nextPage > 1) { %>  
         <a href="" class="not-active" >...</a>
     <% } %>               
     <% if (lastPage !== currentPage  && nextPage !== lastPage) { %>  

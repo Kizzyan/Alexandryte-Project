@@ -3,14 +3,23 @@
 <body>
     <%- include('include/nav.ejs') %>
     <main>
-        <article class="container">
-            <button class="container-icon searchBtn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <a class="container-icon" href="/add-item">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-        </article>
+        <div class="subheader-container">
+            <h2 class="item-count">
+                <% if (isSearch) { %>
+                    <%= totalNum %> items match this search: 
+                <% } else {%>
+                    <%= totalNum %> items:
+                <% } %> 
+            </h2>
+            <article class="container">
+                <button class="container-icon searchBtn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <a class="container-icon" href="/add-item">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </article>
+        </div>
         <article class="search" id="searchContainer">
             <form class="search-form" action="/search" method="get">
                 <article class="search-form-container">
@@ -20,32 +29,10 @@
                 <article class="search-form-container">
                     <label for="type" class="form-label">Type</label> <br>
                     <input type="text" name="type" id="type" placeholder="Search for media type"></input>
-                    <!-- <select name="type" id="type" form="add-form">
-                        <option value="" disabled  selected>Pick an option</option>
-                        <option value="Series">Series</option>
-                        <option value="Anime">Anime</option>
-                        <option value="Movie" >Movie</option>
-                        <option value="Manga/Comic" >Manga/Comic</option>
-                        <option value="Book" >Book</option>
-                    </select> -->
                 </article>
-                <!-- <article class="search-form-container">
-                    <label for="itemStatus" class="form-label">Item's Status:</label>
-                    <select name="itemStatus" id="itemStatus" form="add-form">
-                        <option value="" disabled selected>Pick an option</option>
-                        <option value="Finished">Finished</option>
-                        <option value="Unfinished">Unfinished</option>
-                    </select>
-                </article> -->
                 <article class="search-form-container">
                     <label for="userStatus" class="form-label">Your's Status</label> <br>
                     <input type="text" name="userStatus" id="userStatus" placeholder="Search for your status"></input>
-                    <!-- <select name="userStatus" id="userStatus" form="add-form">
-                        <option value="" disabled selected>Pick an option</option>
-                        <option value="Want to see" >Want to see</option>
-                        <option value="Seeing" >Seeing</option>
-                        <option value="Seen" >Seen</option>
-                    </select> -->
                 </article>
                 <article class="search-form-container">
                     <label for="tags" class="form-label">Tags</label> <br>
