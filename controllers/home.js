@@ -34,8 +34,7 @@ exports.getSearch = async (req, res, next) => {
   let searchTitle = req.query.title;
   let searchType = req.query.type;
   let searchStatus = req.query.userStatus;
-  let searchTags = req.query.tags.replaceAll(" ", "").split(',');
-  console.log("-",searchStatus,"-");
+  let searchTags = req.query.tags.replaceAll(" ", "").split(",");
   if (!req.user) {
     return res.redirect("/login");
   }
@@ -44,12 +43,11 @@ exports.getSearch = async (req, res, next) => {
     $or: [
       { title: searchTitle == "" ? "" : { $regex: searchTitle } },
       { type: searchType == "" ? "" : { $regex: searchType } },
-      { userStatus: searchStatus},
+      { userStatus: searchStatus },
       { tags: { $all: searchTags } },
     ],
-  })
-  // console.log(numItem);
-  console.log(items);
+  });
+
   res.render("index.ejs", {
     items: items,
     totalNum: items.length,
