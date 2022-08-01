@@ -19,7 +19,7 @@
 ## About Feedback:
 Besides being a personal helper, this project is also part of my portfolio, so i will gladly accept any feedback or critic that could help me to improve this application and future ones too.
 
-You can email me at yan.leitao26@gmail.com or contact me at <a href="https://www.linkedin.com/in/yan-gabriel-leit%C3%A3o-de-lima-24b080229/">Linkedin</a>
+You can email me at yan.leitao26@gmail.com or contact me at <a href="https://www.linkedin.com/in/gabriel-leitao/">Linkedin</a>
 
 ---
 
